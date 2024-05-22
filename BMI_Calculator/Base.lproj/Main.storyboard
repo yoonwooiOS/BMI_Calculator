@@ -85,9 +85,29 @@
                                     <action selector="randomBmi:" destination="BYZ-38-t0r" eventType="touchUpInside" id="c9r-Br-dWB"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JPf-3N-xn6">
+                                <rect key="frame" x="20" y="189" width="174" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TJd-If-PX3">
+                                <rect key="frame" x="37" y="588" width="318" height="39"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <connections>
+                                    <action selector="resetButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nXS-Jj-0r7"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <gestureRecognizers/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="XxJ-dt-FSm" appends="YES" id="rrA-ZY-40i"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="BmiCalulatorImage" destination="sxa-h1-4Qi" id="EOK-9U-Rb8"/>
@@ -95,13 +115,20 @@
                         <outlet property="heightQuestionLabel" destination="kli-ks-cdm" id="2Lj-Is-Aow"/>
                         <outlet property="heightTextField" destination="Pcg-nc-iA9" id="Dq6-Ke-RJv"/>
                         <outlet property="randomBmiButton" destination="wj2-Is-w5E" id="kI2-ZB-M9W"/>
+                        <outlet property="resetButton" destination="TJd-If-PX3" id="atC-jy-erc"/>
                         <outlet property="subTitleLable" destination="9Wr-A7-r0S" id="FcU-vn-agu"/>
                         <outlet property="titleLabel" destination="7Ng-CL-bwW" id="3M3-44-F8T"/>
+                        <outlet property="userName" destination="JPf-3N-xn6" id="7Oa-Gk-u5K"/>
                         <outlet property="weightQuestionLabel" destination="7aY-PP-ysc" id="KjP-Th-Z0Z"/>
                         <outlet property="weightTextField" destination="zaH-hW-xs9" id="LZ0-Vb-TIF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="XxJ-dt-FSm">
+                    <connections>
+                        <action selector="keyboardDismiss:" destination="BYZ-38-t0r" id="iJr-k4-JeY"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="112.21374045801527" y="-2.1126760563380285"/>
         </scene>
