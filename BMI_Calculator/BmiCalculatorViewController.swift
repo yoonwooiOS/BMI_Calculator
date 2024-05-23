@@ -35,31 +35,32 @@ class BmiCalculatorViewController: UIViewController {
     var uesrHeight = ""
     var userWeight = ""
     
+    var usernicName = ""
+    override func viewDidAppear(_ animated: Bool) {
+        
+        
+        
+        
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        heightTextField.text = "\(UserDefaults.standard.double(forKey: "키"))"
-        weightTextField.text = "\(UserDefaults.standard.double(forKey: "몸무게"))"
+        print(userName.text!, "뷰디드 로드")
         
+       
+        loadData()
+        print(userName.text!, "로드 데이터 이후")
         
-        labelUiDesign(labelName: userName, labelText: "김윤우님", labelTextColor: .black, textAlignment: .left, fontSize: 30)
-        labelUiDesign(labelName: titleLabel, labelText: "BMI Calculator", labelTextColor: .black, textAlignment: .left, fontSize: 21)
-        labelUiDesign(labelName: subTitleLable, labelText: "당신의 BMI 지수를\n알려드릴게요.", labelTextColor: .black, textAlignment: .left, fontSize: 15)
-        
-        labelUiDesign(labelName: heightQuestionLabel, labelText: "키가 어떻게 되시나요?", labelTextColor: .black, textAlignment: .left, fontSize: 15)
-        labelUiDesign(labelName: weightQuestionLabel, labelText: "몸무게는 어떻게 되시나요?", labelTextColor: .black, textAlignment: .left, fontSize: 15)
-        
-        buttonUiDesign(buttonLabelName: randomBmiButton, buttontitle: "랜덤으로 BMI 계산하기", backGroundColor: .white, tintColor: .red, titleFontSize: 12)
-        buttonUiDesign(buttonLabelName: bmiCalculateResultButton, buttontitle: "결과 확인 및 저장", backGroundColor: .purple, tintColor: .white, titleFontSize: 17)
-        
-        buttonUiDesign(buttonLabelName: resetButton, buttontitle: "몸무게, 키, 이름 초기화", backGroundColor: .red, tintColor: .white, titleFontSize: 17)
-        
+        labelUiInitialize()
+        print(userName.text!, "라벨 이니셜라이즈 ")
+        buttonUiInitialize()
         
         imangeUiDesign(imageViewName: BmiCalulatorImage, imageName: "image", contentmode: .scaleAspectFill)
-        
         textFieldUiDesgin(textFieldName: weightTextField, placeHolderText: "ex)60, 60.0")
         textFieldUiDesgin(textFieldName: heightTextField, placeHolderText: "ex) 176, 178.2")
         
-    
+        
         
     }
     
@@ -77,10 +78,17 @@ class BmiCalculatorViewController: UIViewController {
             userWeight = text
         }
     }
-
-
+    
+    
     @IBAction func resultButtonTapped(_ sender: UIButton) {
         view.endEditing(true)
+        
+        
+        
+        
+        
+        
+        
         if let finalheight = Double(uesrHeight),
            let finalweight = Double(userWeight) {
             print(finalheight)
@@ -102,16 +110,17 @@ class BmiCalculatorViewController: UIViewController {
             
         }
     }
-
-        
-        
+    
+    
+    
     @IBAction func resetButton(_ sender: UIButton) {
         weightTextField.text = ""
         heightTextField.text = ""
         userName.text = ""
-//        UserDefaults.standard.set( weightTextField.text , forKey: "몸무게")
-//        UserDefaults.standard.set( heightTextField.text, forKey: "키")
-        
+        print(userName.text)
+        UserDefaults.standard.set( weightTextField.text , forKey: "몸무게")
+        UserDefaults.standard.set( heightTextField.text, forKey: "키")
+        UserDefaults.standard.set(userName.text, forKey: "이름")
     }
     
     
@@ -174,18 +183,49 @@ class BmiCalculatorViewController: UIViewController {
         
     }
     func bmiCalculate(calculateWeight weight: Double, calculateHeight height: Double) -> Double {
-//        print(weight)
-//        print(height)
-     let bmiCalculateWeight = weight
-     let bmiCalculateHeight = height
-//        print(btnweight)
-//        print(btnweight)
+       
+        let bmiCalculateWeight = weight
+        let bmiCalculateHeight = height
+      
         let convertMeterHeight = bmiCalculateHeight / 100
-//        print(sheight, "---")
+        
         let bmiresult = bmiCalculateWeight / (convertMeterHeight * convertMeterHeight)
-//        print(bmiresult)
+
         return bmiresult
         
     }
+    
+    func labelUiInitialize() {
+       
+        labelUiDesign(labelName: userName, labelText: "\(usernicName)", labelTextColor: .black, textAlignment: .left, fontSize: 30)
+        labelUiDesign(labelName: titleLabel, labelText: "BMI Calculator", labelTextColor: .black, textAlignment: .left, fontSize: 21)
+        labelUiDesign(labelName: subTitleLable, labelText: "당신의 BMI 지수를\n알려드릴게요.", labelTextColor: .black, textAlignment: .left, fontSize: 15)
+        
+        labelUiDesign(labelName: heightQuestionLabel, labelText: "키가 어떻게 되시나요?", labelTextColor: .black, textAlignment: .left, fontSize: 15)
+        labelUiDesign(labelName: weightQuestionLabel, labelText: "몸무게는 어떻게 되시나요?", labelTextColor: .black, textAlignment: .left, fontSize: 15)
+        
+    }
+    
+    func buttonUiInitialize() {
+        buttonUiDesign(buttonLabelName: randomBmiButton, buttontitle: "랜덤으로 BMI 계산하기", backGroundColor: .white, tintColor: .red, titleFontSize: 12)
+        buttonUiDesign(buttonLabelName: bmiCalculateResultButton, buttontitle: "결과 확인 및 저장", backGroundColor: .purple, tintColor: .white, titleFontSize: 17)
+        
+        buttonUiDesign(buttonLabelName: resetButton, buttontitle: "몸무게, 키, 이름 초기화", backGroundColor: .red, tintColor: .white, titleFontSize: 17)
+    }
+    
+    func loadData() {
+        let loadWeight = "\(UserDefaults.standard.double(forKey: "키"))"
+        let loadHeight = "\(UserDefaults.standard.double(forKey: "몸무게"))"
+        if loadWeight == "0.0" || loadHeight == "0.0" {
+            weightTextField.placeholder = "ex)60, 60.0"
+            heightTextField.placeholder = "ex) 176, 178.2"
+            
+        } else {
+            heightTextField.text = "\(UserDefaults.standard.double(forKey: "키"))"
+            weightTextField.text = "\(UserDefaults.standard.double(forKey: "몸무게"))"
+            usernicName = "김윤우"
+        }
+    }
+    
     
 }
